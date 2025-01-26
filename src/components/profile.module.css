@@ -1,0 +1,110 @@
+/* Full-page container */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(135deg, #6c63ff, #b19cd9);
+  color: #333;
+  font-family: Arial, sans-serif;
+  position: relative;
+}
+
+/* Back button styling */
+.backButton {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: #fff;
+  color: #6c63ff;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.backButton:hover {
+  background-color: #f1f1f1;
+  color: #4a3fbf;
+}
+
+/* Profile card styling */
+.profileCard {
+  background-color: #fff;
+  width: 90%;
+  max-width: 400px;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Profile picture */
+.profilePicture {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Labels */
+.label {
+  font-weight: bold;
+  margin-top: 1rem;
+  display: block;
+  color: #6c63ff;
+  text-align: left;
+}
+
+/* Input fields */
+.input,
+.textarea {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  color: #333;
+  background-color: #f9f9f9;
+}
+
+.input:focus,
+.textarea:focus {
+  border-color: #6c63ff;
+  outline: none;
+}
+
+/* Email (non-editable) */
+.email {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  text-align: left;
+  color: #333;
+}
+
+.invalidInput {
+  border: 2px solid red;
+}
+
+.errorMessage {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
+.loadingMessage {
+  color: orange;
+  font-size: 0.9rem;
+  margin-top: 5px;
+}

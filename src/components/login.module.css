@@ -1,0 +1,58 @@
+/* Full-screen container with gradient background */
+.container {
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(
+    135deg,
+    #6c63ff,
+    #b19cd9
+  ); /* Gradient background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  font-family: "Roboto", sans-serif; /* Modern, clean font */
+}
+
+/* Welcome container for centering text and button */
+.welcomeContainer {
+  text-align: center;
+  color: white;
+  max-width: 400px; /* Limit the width for better alignment */
+  padding: 20px;
+}
+
+.welcomeContainer h1 {
+  font-size: 2.8rem;
+  margin-bottom: 15px;
+  font-weight: 700; /* Bold and impactful title */
+  display: inline; /* Keeps 'Welcome to' and 'Gymmit' on the same line */
+}
+
+.welcomeContainer h1 span {
+  font-size: 2.8rem; /* Ensures 'Gymmit' aligns with 'Welcome to' */
+  color: #ffcc00; /* Different color for 'Gymmit' */
+}
+
+.welcomeContainer p {
+  font-size: 1.1rem;
+  color: #d1d1d1; /* Light grey color for modern look */
+  margin-bottom: 30px;
+  line-height: 1.6; /* More breathing room for better readability */
+  font-weight: 400; /* Regular weight for subtext */
+  opacity: 0.85; /* Slight opacity to make it feel lighter */
+}
+
+/* Sign-in button */
+.signInButton {
+  background-color: white;
+  color: #6c63ff;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 30px; /* Rounded button for a modern feel */
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

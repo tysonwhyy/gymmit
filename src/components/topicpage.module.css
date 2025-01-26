@@ -1,0 +1,152 @@
+/* Main container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: "Arial", sans-serif;
+  background: #f6f7f9;
+  height: 100vh; /* Ensure the container fills the viewport height */
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  position: relative;
+}
+
+/* Topic Header */
+.topicHeader {
+  background-color: #fff;
+  padding: 1.5rem 1rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Comments container */
+.commentsContainer {
+  flex-grow: 1; /* Allow the comments section to take the available space */
+  overflow-y: auto; /* Enable scrolling for comments section */
+  padding-bottom: 6rem; /* Space for sticky comment input */
+  margin-bottom: 2rem; /* Optional, space before the comment section */
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+
+/* Individual comment card */
+.comment {
+  background: #fff;
+  padding: 1.25rem;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.comment strong {
+  color: #6c63ff;
+  font-weight: 600;
+}
+
+.timestamp {
+  font-size: 0.85rem;
+  color: #aaa;
+  margin-top: 0.5rem;
+  align-self: flex-start;
+}
+
+/* Sticky Add Comment section */
+.addComment {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: 1.25rem;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Input and Button styling */
+.input {
+  flex: 1;
+  padding: 0.8rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input:focus {
+  border-color: #6c63ff;
+  box-shadow: 0 0 4px rgba(108, 99, 255, 0.5);
+}
+
+.addButton {
+  padding: 0.8rem 1.5rem;
+  background-color: #6c63ff;
+  color: #fff;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.addButton:hover {
+  background-color: #5a54d2;
+  transform: translateY(-2px);
+}
+
+/* Make everything responsive */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .input {
+    font-size: 0.9rem;
+  }
+
+  .addButton {
+    font-size: 0.9rem;
+  }
+}
+/* Main container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: "Arial", sans-serif;
+  background: #f6f7f9;
+  height: 100vh; /* Ensure the container fills the viewport height */
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  position: relative;
+}
+
+/* Back button styling */
+.backButton {
+  padding: 0.5rem 1rem; /* Smaller padding */
+  background-color: #6c63ff;
+  color: #fff;
+  font-size: 0.9rem; /* Smaller font size */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  margin-bottom: 1rem; /* Space before the topic header */
+  align-self: flex-start; /* Align it to the left */
+}
+
+.backButton:hover {
+  background-color: #5a54d2;
+  transform: translateY(-2px);
+}

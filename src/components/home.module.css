@@ -1,0 +1,232 @@
+/* Main container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: "Arial", sans-serif;
+  background: #f6f7f9;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  position: relative;
+}
+
+/* Profile container (top-right corner) */
+.profileContainer {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profilePicture {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid #ddd;
+  cursor: pointer;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.profilePicture:hover {
+  border-color: #6c63ff;
+  transform: scale(1.05);
+}
+
+.defaultProfile {
+  width: 50px;
+  height: 50px;
+  background-color: #ddd;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #fff;
+  transition: background-color 0.2s ease;
+}
+
+.defaultProfile:hover {
+  background-color: #6c63ff;
+}
+/* Dropdown menu */
+.dropdown {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 200px; /* Set a fixed width for the dropdown */
+  padding: 0.5rem 0; /* Add some padding */
+}
+
+.dropdown button {
+  display: block;
+  width: 100%;
+  padding: 0.8rem 1rem;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #555;
+  transition: background-color 0.2s ease;
+}
+
+.dropdown button:hover {
+  background-color: #f9f9f9;
+}
+
+/* Main content container */
+.mainContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Header styling */
+h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+}
+
+/* Topic list container */
+.topicList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-height: 60vh;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.topicList::-webkit-scrollbar {
+  width: 8px;
+}
+
+.topicList::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 8px;
+}
+
+.topicList::-webkit-scrollbar-thumb:hover {
+  background-color: #6c63ff;
+}
+
+/* Individual topic */
+.topicItem {
+  padding: 1rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  font-size: 1rem;
+  color: #333;
+}
+
+.topicItem:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Add topic section */
+.addTopicContainer {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.input {
+  flex: 1;
+  padding: 0.8rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input:focus {
+  border-color: #6c63ff;
+  box-shadow: 0 0 4px rgba(108, 99, 255, 0.5);
+}
+
+.addButton {
+  padding: 0.8rem 1.5rem;
+  background-color: #6c63ff;
+  color: #fff;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.addButton:hover {
+  background-color: #5a54d2;
+  transform: translateY(-2px);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .profilePicture,
+  .defaultProfile {
+    width: 40px;
+    height: 40px;
+  }
+
+  .topicItem {
+    font-size: 0.9rem;
+    padding: 0.8rem;
+  }
+
+  .addButton {
+    font-size: 0.9rem;
+    padding: 0.6rem 1.2rem;
+  }
+}
+
+/* Search container */
+.searchContainer {
+  display: flex;
+  justify-content: center; /* Centers the search bar horizontally */
+  margin-bottom: 1rem; /* Optional: Adds some space below the search bar */
+}
+
+.searchInput {
+  width: 300px; /* Set a fixed width for the search input */
+  padding: 0.8rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.searchInput:focus {
+  border-color: #6c63ff;
+  box-shadow: 0 0 4px rgba(108, 99, 255, 0.5);
+}
+
+/* Add this CSS for the error message */
+.errorMessage {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
