@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
-import "./App.css";
-import { auth, db } from "./firebase.ts";
-import { onAuthStateChanged, User } from "firebase/auth";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { onAuthStateChanged, User } from "firebase/auth";
 import { doc, getDoc, setDoc, Firestore } from "firebase/firestore";
 
+import { auth, db } from "./firebase";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import Profile from "./components/Profile";
-import TopicPage from "./components/TopicPage"; // Import the new TopicPage component
+import TopicPage from "./components/TopicPage";
 
 interface Props {
   user: User | null;
@@ -24,10 +23,10 @@ function App() {
 
   const props: Props = {
     user: auth.currentUser,
-    userId: userId,
-    setUserId: setUserId,
-    profilePicture: profilePicture,
-    db: db,
+    userId,
+    setUserId,
+    profilePicture,
+    db,
   };
 
   useEffect(() => {
@@ -44,7 +43,7 @@ function App() {
     return () => unsubscribe();
   }, []);
 
-  async function handleUserLogin(user: User, db: Firestore) {
+  const handleUserLogin = async (user: User, db: Firestore) => {
     try {
       const userDocRef = doc(db, "users", user.uid);
       const userDoc = await getDoc(userDocRef);
@@ -63,7 +62,7 @@ function App() {
     } catch (error) {
       console.error("Error adding user to Firestore: ", error);
     }
-  }
+  };
 
   return (
     <BrowserRouter>
@@ -86,7 +85,6 @@ function App() {
             userId ? <Profile props={props} /> : <Navigate to="/" replace />
           }
         />
-        {/* New route for topic pages */}
         <Route
           path="/topic/:id"
           element={

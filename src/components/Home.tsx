@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import styles from "./home.module.css";
-import { doSignInWithGoogle, doSignOut } from "../auth.ts";
+import { doSignInWithGoogle, doSignOut } from "../auth";
 import { collection, addDoc, getDocs, query, where } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 
@@ -28,7 +28,6 @@ export default function Home({ props }: { props: Props }) {
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const profilePicRef = useRef<HTMLImageElement | null>(null);
 
-  // Fetch topics from Firestore
   useEffect(() => {
     const fetchTopics = async () => {
       try {
@@ -56,25 +55,9 @@ export default function Home({ props }: { props: Props }) {
     }
   };
 
-  const handleSwitchAccount = () => {
-    console.log("Switching account...");
-    doSignInWithGoogle();
-  };
-
-  const handleViewProfile = () => {
-    console.log("Going to profile");
-    navigate("/profile");
-  };
-
-  const toggleDropdown = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setIsDropdownVisible((prev) => !prev);
-  };
-
   const handleAddTopic = async () => {
     if (newTopic.trim() === "") return;
 
-    // Check if the topic already exists
     const topicsQuery = query(
       collection(db, "topics"),
       where("title", "==", newTopic.trim())
@@ -103,12 +86,10 @@ export default function Home({ props }: { props: Props }) {
     navigate(`/topic/${topicId}`);
   };
 
-  // Filter topics based on the search query
   const filteredTopics = topics.filter((topic) =>
     topic.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -135,28 +116,24 @@ export default function Home({ props }: { props: Props }) {
       <div className={styles.profileContainer}>
         {profilePicture ? (
           <img
-            ref={profilePicRef} // Changed the ref to match the HTMLImageElement type
+            ref={profilePicRef}
             src={profilePicture}
             alt="Profile"
             className={styles.profilePicture}
-            onClick={toggleDropdown}
+            onClick={() => setIsDropdownVisible(!isDropdownVisible)}
           />
         ) : (
           <div
             ref={dropdownRef}
             className={styles.defaultProfile}
-            onClick={toggleDropdown}
+            onClick={() => setIsDropdownVisible(!isDropdownVisible)}
           >
             No Image
           </div>
         )}
         {isDropdownVisible && (
           <div ref={dropdownRef} className={styles.dropdown}>
-            <button onClick={handleSwitchAccount}>
-              Sign in with a different account
-            </button>
             <button onClick={handleSignOut}>Log out</button>
-            <button onClick={handleViewProfile}>View Profile</button>
           </div>
         )}
       </div>

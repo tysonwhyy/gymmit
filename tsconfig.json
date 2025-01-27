@@ -1,33 +1,27 @@
 {
   "compilerOptions": {
-    "target": "ES2017", // Target modern JavaScript
-    "lib": ["DOM", "ES2017", "DOM.Iterable"], // Ensure compatibility with browser APIs
-    "module": "ESNext", // Use ESNext modules for modern tooling
-    "moduleResolution": "Node", // Resolve modules using Node-style
-    "baseUrl": "./", // Set the base URL for module resolution
+    "target": "ES2017",
+    "lib": ["DOM", "ES2017", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "baseUrl": "./",
     "paths": {
-      // Simplify imports with paths
       "@/*": ["src/*"]
     },
-    "jsx": "react-jsx", // Use React's JSX transformation
-    "strict": true, // Enable all strict type-checking options
-    "esModuleInterop": true, // Enable compatibility with CommonJS modules
-    "resolveJsonModule": true, // Allow importing JSON files
+    "jsx": "react-jsx",
+    "strict": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
     "allowImportingTsExtensions": true,
-    "allowSyntheticDefaultImports": true, // Support default imports for legacy modules
-    "skipLibCheck": true, // Skip type checks of .d.ts files
-    "forceConsistentCasingInFileNames": true, // Ensure file imports have consistent casing
-    "outDir": "dist", // Compile output folder
-    "incremental": true, // Enable incremental compilation for faster builds
-    "noEmit": true
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "dist",
+    "incremental": true,
+    "noEmit": true,
+    "types": ["vite/client"] // Added this to support Vite in TypeScript
   },
-  "exclude": [
-    "node_modules", // Exclude node_modules from compilation
-    "dist", // Exclude build output folder
-    "vercel" // Exclude any deployment-specific folders
-  ],
-  "include": [
-    "src/**/*" // Include all files in the src folder
-  ],
+  "exclude": ["node_modules", "dist", "vercel"],
+  "include": ["src/**/*"],
   "types": ["node", "firebase", "react-router-dom"]
 }
