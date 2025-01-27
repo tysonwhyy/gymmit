@@ -28,5 +28,6 @@
   ],
   "include": [
     "src/**/*" // Include all files in the src folder
-  ]
+  ],
+  "types": ["node", "firebase", "react-router-dom"]
 }
