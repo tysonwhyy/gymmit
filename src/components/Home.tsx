@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import styles from "./home.module.css";
-import { doSignInWithGoogle, doSignOut } from "../auth";
+import { doSignInWithGoogle, doSignOut } from "../firebase/auth";
 import { collection, addDoc, getDocs, query, where } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 

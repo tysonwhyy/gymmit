@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { onAuthStateChanged, User } from "firebase/auth";
 import { doc, getDoc, setDoc, Firestore } from "firebase/firestore";
 
-import { auth, db } from "./firebase";
+import { auth, db } from "./firebase/firebase";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import Profile from "./components/Profile";
