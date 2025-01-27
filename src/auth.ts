@@ -1,21 +1,32 @@
-import { auth } from "./firebase"; // imports from firebase.js
 import {
+  getAuth,
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithEmailAndPassword,
   signInWithPopup,
+  signOut,
+  Auth,
 } from "firebase/auth";
 
-export const doCreateUserWithEmailAndPassword = async (email, password) => {
+// Initialize Firebase auth
+const auth: Auth = getAuth();
+
+export const doCreateUserWithEmailAndPassword = async (
+  email: string,
+  password: string
+): Promise<any> => {
   return createUserWithEmailAndPassword(auth, email, password);
 };
 
-export const doSignInWithEmailAndPassword = (email, password) => {
+export const doSignInWithEmailAndPassword = (
+  email: string,
+  password: string
+): Promise<any> => {
   return signInWithEmailAndPassword(auth, email, password);
 };
 
-// sign in with google handles both registration and sign in
-export const doSignInWithGoogle = async () => {
+// Sign in with Google handles both registration and sign-in
+export const doSignInWithGoogle = async (): Promise<any> => {
   const provider = new GoogleAuthProvider();
   try {
     const result = await signInWithPopup(auth, provider);
@@ -26,6 +37,6 @@ export const doSignInWithGoogle = async () => {
   }
 };
 
-export const doSignOut = () => {
-  return auth.signOut();
+export const doSignOut = (): Promise<void> => {
+  return signOut(auth);
 };

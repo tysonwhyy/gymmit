@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import { auth, db } from "./firebase";
+import { auth, db } from "./firebase.ts";
 import { onAuthStateChanged, User } from "firebase/auth";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { doc, getDoc, setDoc, Firestore } from "firebase/firestore";
