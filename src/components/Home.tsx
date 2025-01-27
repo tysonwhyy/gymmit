@@ -1,19 +1,38 @@
 import { useState, useEffect, useRef } from "react";
 import styles from "./home.module.css";
 import { doSignInWithGoogle, doSignOut } from "../firebase/auth";
-import { collection, addDoc, getDocs, query, where } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  getDocs,
+  query,
+  where,
+  DocumentData,
+} from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 
-export default function Home({ props }) {
+interface Topic {
+  id: string;
+  title: string;
+}
+
+interface Props {
+  userId: string | null;
+  setUserId: React.Dispatch<React.SetStateAction<string | null>>;
+  profilePicture: string | null;
+  db: any; // Assuming db is Firestore instance, so we can use 'any' or 'Firestore' from firebase/firestore
+}
+
+export default function Home({ props }: { props: Props }) {
   const { userId, setUserId, profilePicture, db } = props;
-  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
-  const [topics, setTopics] = useState([]); // State to store topics
-  const [newTopic, setNewTopic] = useState(""); // State for new topic input
-  const [searchQuery, setSearchQuery] = useState(""); // State for search query
-  const [errorMessage, setErrorMessage] = useState(""); // State for error message
+  const [isDropdownVisible, setIsDropdownVisible] = useState<boolean>(false);
+  const [topics, setTopics] = useState<Topic[]>([]); // State to store topics
+  const [newTopic, setNewTopic] = useState<string>(""); // State for new topic input
+  const [searchQuery, setSearchQuery] = useState<string>(""); // State for search query
+  const [errorMessage, setErrorMessage] = useState<string>(""); // State for error message
   const navigate = useNavigate();
-  const dropdownRef = useRef(null);
-  const profilePicRef = useRef(null);
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
+  const profilePicRef = useRef<HTMLDivElement | null>(null);
 
   // Fetch topics from Firestore
   useEffect(() => {
@@ -24,7 +43,7 @@ export default function Home({ props }) {
           id: doc.id,
           ...doc.data(),
         }));
-        setTopics(topicsList);
+        setTopics(topicsList as Topic[]);
       } catch (error) {
         console.error("Error fetching topics:", error);
       }
@@ -53,7 +72,7 @@ export default function Home({ props }) {
     navigate("/profile");
   };
 
-  const toggleDropdown = (e) => {
+  const toggleDropdown = (e: React.MouseEvent) => {
     e.stopPropagation();
     setIsDropdownVisible((prev) => !prev);
   };
@@ -86,7 +105,7 @@ export default function Home({ props }) {
     }
   };
 
-  const handleNavigateToTopic = (topicId) => {
+  const handleNavigateToTopic = (topicId: string) => {
     navigate(`/topic/${topicId}`);
   };
 
@@ -97,12 +116,12 @@ export default function Home({ props }) {
 
   // Close dropdown when clicking outside
   useEffect(() => {
-    const handleClickOutside = (event) => {
+    const handleClickOutside = (event: MouseEvent) => {
       if (
         dropdownRef.current &&
-        !dropdownRef.current.contains(event.target) &&
+        !dropdownRef.current.contains(event.target as Node) &&
         profilePicRef.current &&
-        !profilePicRef.current.contains(event.target)
+        !profilePicRef.current.contains(event.target as Node)
       ) {
         setIsDropdownVisible(false);
       }

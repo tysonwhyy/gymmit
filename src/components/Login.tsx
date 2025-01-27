@@ -2,8 +2,13 @@ import { useState } from "react";
 import styles from "./login.module.css";
 import { doSignInWithGoogle } from "../firebase/auth";
 
-export default function Login({ props }) {
+interface Props {
+  setUserId: React.Dispatch<React.SetStateAction<string | null>>;
+}
+
+export default function Login({ props }: { props: Props }) {
   const { setUserId } = props;
+
   const handleSignIn = async () => {
     try {
       const result = await doSignInWithGoogle();

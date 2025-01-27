@@ -1,20 +1,28 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import { auth, db } from "./firebase/firebase";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, User } from "firebase/auth";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc, Firestore } from "firebase/firestore";
 
 import Home from "./components/Home";
 import Login from "./components/Login";
 import Profile from "./components/Profile";
 import TopicPage from "./components/TopicPage"; // Import the new TopicPage component
 
-function App() {
-  const [userId, setUserId] = useState(null);
-  const [profilePicture, setProfilePicture] = useState(null);
+interface Props {
+  user: User | null;
+  userId: string | null;
+  setUserId: React.Dispatch<React.SetStateAction<string | null>>;
+  profilePicture: string | null;
+  db: Firestore;
+}
 
-  const props = {
+function App() {
+  const [userId, setUserId] = useState<string | null>(null);
+  const [profilePicture, setProfilePicture] = useState<string | null>(null);
+
+  const props: Props = {
     user: auth.currentUser,
     userId: userId,
     setUserId: setUserId,
@@ -25,8 +33,8 @@ function App() {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (userObj) => {
       if (userObj) {
-        setProfilePicture(auth.currentUser.photoURL);
-        setUserId(auth.currentUser.uid);
+        setProfilePicture(auth.currentUser?.photoURL ?? null);
+        setUserId(auth.currentUser?.uid ?? null);
         handleUserLogin(userObj, db);
       } else {
         setUserId(null);
@@ -36,7 +44,7 @@ function App() {
     return () => unsubscribe();
   }, []);
 
-  async function handleUserLogin(user, db) {
+  async function handleUserLogin(user: User, db: Firestore) {
     try {
       const userDocRef = doc(db, "users", user.uid);
       const userDoc = await getDoc(userDocRef);

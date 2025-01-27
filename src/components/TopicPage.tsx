@@ -11,14 +11,31 @@ import {
 } from "firebase/firestore";
 import styles from "./topicpage.module.css";
 
-export default function TopicPage({ props }) {
+interface Comment {
+  id: string;
+  text: string;
+  createdAt: string;
+  username: string;
+}
+
+interface Topic {
+  id: string;
+  title: string;
+}
+
+interface Props {
+  db: any;
+  userId: string | null;
+}
+
+export default function TopicPage({ props }: { props: Props }) {
   const { db, userId } = props;
-  const { id } = useParams(); // Get the topic ID from the URL
+  const { id } = useParams<{ id: string }>(); // Get the topic ID from the URL
   const navigate = useNavigate(); // Hook to navigate programmatically
-  const [topic, setTopic] = useState(null);
-  const [comments, setComments] = useState([]);
-  const [newComment, setNewComment] = useState("");
-  const [commentUsername, setCommentUsername] = useState("Anonymous");
+  const [topic, setTopic] = useState<Topic | null>(null);
+  const [comments, setComments] = useState<Comment[]>([]);
+  const [newComment, setNewComment] = useState<string>("");
+  const [commentUsername, setCommentUsername] = useState<string>("Anonymous");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -84,7 +101,7 @@ export default function TopicPage({ props }) {
     }
   };
 
-  const formatTimestamp = (timestamp) => {
+  const formatTimestamp = (timestamp: string) => {
     const date = new Date(timestamp);
     return date.toLocaleString("en-US", {
       dateStyle: "medium",

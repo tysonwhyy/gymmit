@@ -12,14 +12,21 @@ import { useNavigate } from "react-router-dom";
 import styles from "./profile.module.css";
 import { debounce } from "lodash";
 
-export default function Profile({ props }) {
+interface Props {
+  profilePicture: string | null;
+  db: any;
+  user: { email: string; uid: string };
+  userId: string;
+}
+
+export default function Profile({ props }: { props: Props }) {
   const { profilePicture, db, user, userId } = props;
   const navigate = useNavigate();
-  const [username, setUsername] = useState("");
-  const [lastValidUsername, setLastValidUsername] = useState("");
-  const [bio, setBio] = useState("");
-  const [isUsernameValid, setIsUsernameValid] = useState(true);
-  const [isUpdating, setIsUpdating] = useState(false);
+  const [username, setUsername] = useState<string>("");
+  const [lastValidUsername, setLastValidUsername] = useState<string>("");
+  const [bio, setBio] = useState<string>("");
+  const [isUsernameValid, setIsUsernameValid] = useState<boolean>(true);
+  const [isUpdating, setIsUpdating] = useState<boolean>(false);
 
   const handleBackToHome = async () => {
     if (!isUsernameValid) {
@@ -53,7 +60,7 @@ export default function Profile({ props }) {
     fetchUserData();
   }, [db, userId]);
 
-  const validateUsername = async (newUsername) => {
+  const validateUsername = async (newUsername: string): Promise<boolean> => {
     if (!newUsername.trim()) return false;
     const usersCollectionRef = collection(db, "users");
     const usernameQuery = query(
@@ -66,7 +73,7 @@ export default function Profile({ props }) {
     );
   };
 
-  const debouncedValidate = debounce(async (newUsername) => {
+  const debouncedValidate = debounce(async (newUsername: string) => {
     setIsUpdating(true);
     const isValid = await validateUsername(newUsername);
     setIsUsernameValid(isValid);
@@ -82,13 +89,13 @@ export default function Profile({ props }) {
     setIsUpdating(false);
   }, 500);
 
-  const handleUsernameChange = (e) => {
+  const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newUsername = e.target.value.replace(/\s/g, "");
     setUsername(newUsername);
     debouncedValidate(newUsername);
   };
 
-  const handleBioChange = async (e) => {
+  const handleBioChange = async (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newBio = e.target.value;
     setBio(newBio);
     try {
@@ -106,7 +113,7 @@ export default function Profile({ props }) {
       </button>
       <div className={styles.profileCard}>
         <img
-          src={profilePicture}
+          src={profilePicture || "/default-avatar.png"}
           alt="Profile"
           className={styles.profilePicture}
         />
