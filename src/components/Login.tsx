@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./login.module.css";
-import { doSignInWithGoogle } from "../firebase/auth";
+import { doSignInWithGoogle } from "../auth";
 
 interface Props {
   setUserId: React.Dispatch<React.SetStateAction<string | null>>;
