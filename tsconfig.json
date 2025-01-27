@@ -1,16 +1,30 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",
+    "target": "ES2017", // Target modern JavaScript
+    "lib": ["DOM", "ES2017", "DOM.Iterable"], // Ensure compatibility with browser APIs
+    "module": "ESNext", // Use ESNext modules for modern tooling
+    "moduleResolution": "Node", // Resolve modules using Node-style
+    "baseUrl": "./", // Set the base URL for module resolution
     "paths": {
-      "*": ["src/*"]
+      // Simplify imports with paths
+      "@/*": ["src/*"]
     },
-    "target": "ES2017",
-    "lib": ["DOM", "ES2017", "DOM.Iterable", "ScriptHost"],
-    "strict": true,
-    "module": "ESNext",
-    "moduleResolution": "Node",
-    "jsx": "react-jsx",
-    "esModuleInterop": true,
-    "skipLibCheck": true
-  }
+    "jsx": "react-jsx", // Use React's JSX transformation
+    "strict": true, // Enable all strict type-checking options
+    "esModuleInterop": true, // Enable compatibility with CommonJS modules
+    "resolveJsonModule": true, // Allow importing JSON files
+    "allowSyntheticDefaultImports": true, // Support default imports for legacy modules
+    "skipLibCheck": true, // Skip type checks of .d.ts files
+    "forceConsistentCasingInFileNames": true, // Ensure file imports have consistent casing
+    "outDir": "dist", // Compile output folder
+    "incremental": true // Enable incremental compilation for faster builds
+  },
+  "exclude": [
+    "node_modules", // Exclude node_modules from compilation
+    "dist", // Exclude build output folder
+    "vercel" // Exclude any deployment-specific folders
+  ],
+  "include": [
+    "src/**/*" // Include all files in the src folder
+  ]
 }
