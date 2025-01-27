@@ -3,6 +3,14 @@
     "baseUrl": "./",
     "paths": {
       "*": ["src/*"]
-    }
+    },
+    "target": "ES2017",
+    "lib": ["DOM", "ES2017", "DOM.Iterable", "ScriptHost"],
+    "strict": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "jsx": "react-jsx",
+    "esModuleInterop": true,
+    "skipLibCheck": true
   }
 }
