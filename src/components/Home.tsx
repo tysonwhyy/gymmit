@@ -1,14 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import styles from "./home.module.css";
 import { doSignInWithGoogle, doSignOut } from "../auth";
-import {
-  collection,
-  addDoc,
-  getDocs,
-  query,
-  where,
-  DocumentData,
-} from "firebase/firestore";
+import { collection, addDoc, getDocs, query, where } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 
 interface Topic {
@@ -20,19 +13,20 @@ interface Props {
   userId: string | null;
   setUserId: React.Dispatch<React.SetStateAction<string | null>>;
   profilePicture: string | null;
-  db: any; // Assuming db is Firestore instance, so we can use 'any' or 'Firestore' from firebase/firestore
+  db: any;
 }
 
 export default function Home({ props }: { props: Props }) {
   const { userId, setUserId, profilePicture, db } = props;
   const [isDropdownVisible, setIsDropdownVisible] = useState<boolean>(false);
-  const [topics, setTopics] = useState<Topic[]>([]); // State to store topics
-  const [newTopic, setNewTopic] = useState<string>(""); // State for new topic input
-  const [searchQuery, setSearchQuery] = useState<string>(""); // State for search query
-  const [errorMessage, setErrorMessage] = useState<string>(""); // State for error message
+  const [topics, setTopics] = useState<Topic[]>([]);
+  const [newTopic, setNewTopic] = useState<string>("");
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string>("");
   const navigate = useNavigate();
+
   const dropdownRef = useRef<HTMLDivElement | null>(null);
-  const profilePicRef = useRef<HTMLDivElement | null>(null);
+  const profilePicRef = useRef<HTMLImageElement | null>(null);
 
   // Fetch topics from Firestore
   useEffect(() => {
@@ -99,7 +93,7 @@ export default function Home({ props }: { props: Props }) {
       });
       setTopics((prev) => [...prev, { id: docRef.id, title: newTopic }]);
       setNewTopic("");
-      setErrorMessage(""); // Clear any previous error message
+      setErrorMessage("");
     } catch (error) {
       console.error("Error adding topic:", error);
     }
@@ -141,7 +135,7 @@ export default function Home({ props }: { props: Props }) {
       <div className={styles.profileContainer}>
         {profilePicture ? (
           <img
-            ref={profilePicRef}
+            ref={profilePicRef} // Changed the ref to match the HTMLImageElement type
             src={profilePicture}
             alt="Profile"
             className={styles.profilePicture}
@@ -149,7 +143,7 @@ export default function Home({ props }: { props: Props }) {
           />
         ) : (
           <div
-            ref={profilePicRef}
+            ref={dropdownRef}
             className={styles.defaultProfile}
             onClick={toggleDropdown}
           >
@@ -170,7 +164,6 @@ export default function Home({ props }: { props: Props }) {
       <div className={styles.mainContent}>
         <h1>Topics</h1>
 
-        {/* Search input */}
         <div className={styles.searchContainer}>
           <input
             type="text"
@@ -193,7 +186,6 @@ export default function Home({ props }: { props: Props }) {
           ))}
         </div>
 
-        {/* Error message if topic already exists */}
         {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
 
         <div className={styles.addTopicContainer}>

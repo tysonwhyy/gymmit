@@ -13,11 +13,13 @@
     "strict": true, // Enable all strict type-checking options
     "esModuleInterop": true, // Enable compatibility with CommonJS modules
     "resolveJsonModule": true, // Allow importing JSON files
+    "allowImportingTsExtensions": true,
     "allowSyntheticDefaultImports": true, // Support default imports for legacy modules
     "skipLibCheck": true, // Skip type checks of .d.ts files
     "forceConsistentCasingInFileNames": true, // Ensure file imports have consistent casing
     "outDir": "dist", // Compile output folder
-    "incremental": true // Enable incremental compilation for faster builds
+    "incremental": true, // Enable incremental compilation for faster builds
+    "noEmit": true
   },
   "exclude": [
     "node_modules", // Exclude node_modules from compilation
